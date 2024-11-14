@@ -1,0 +1,66 @@
+/* Общие стили */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #343a40;
+  margin: 0;
+  padding: 0;
+}
+
+/* Стили для заголовка */
+header {
+  background: linear-gradient(90deg, rgba(28, 200, 255, 0.8), rgba(0, 123, 255, 0.8));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+header p {
+  font-size: 1.25rem;
+}
+
+/* Стили для основной секции */
+main {
+  margin-bottom: 2rem;
+}
+
+main h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #007bff;
+}
+
+main .bg-white {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Стили для карты и графика */
+.map-container, .chart {
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+  height: 400px;
+}
+
+/* Анимация на hover */
+.map-container:hover, .chart:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* Стили для footer */
+footer {
+  background-color: #343a40;
+}
+
+footer p {
+  margin: 0;
+}
