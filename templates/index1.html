@@ -8,42 +8,82 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <!-- Заголовок сторінки -->
-    <header class="text-white text-center py-5">
-        <h1>Кліматичні зміни у місті Дніпро. </h1>
-        <p>Аналіз супутникових даних та кліматичних тенденцій</p>
-    </header>
 
-    <!-- Головний контент -->
-    <main class="container my-5">
-        <!-- Секція: Інформація та графіки -->
-        <<section class="row mb-4">
-            <div class="col-lg-6 mb-4">
-                <h2>Зміна середньорічної температури</h2>
-                <p>Дані про зміну середньорічної температури за останні 50 років.</p>
-                <img src="{{ url_for('static', filename='temperature_chart.png') }}" alt="Графік температури" class="img-fluid">
-            </div>
-            <div class="col-lg-6 mb-4">
-                <h2>Зміна рівня опадів</h2>
-                <p>Супутникові дані про кількість опадів у регіоні.</p>
-                <img src="{{ url_for('static', filename='rainfall_chart.png') }}" alt="Графік рівня опадів" class="img-fluid">
-            </div>
-        </section>
+  <!-- Навигационная панель с кнопками сверху -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Кліматичні зміни у Дніпрі</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">Аналіз кліматичних умов</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('tems') }}">Команда проекту</a>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('another_page') }}">Головна</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Заголовок сторінки -->
+  <header class="bg-primary text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4">Кліматичні зміни у місті Дніпро</h1>
+      <p class="lead">Аналіз супутникових даних та кліматичних тенденцій</p>
+    </div>
+  </header>
+
+  <!-- Головний контент -->
+  <main class="container my-5">
+    <section class="row mb-4">
+      <div class="col-lg-6 mb-4">
+        <h2>Зміна середньорічної температури</h2>
+        <p>Дані про зміну середньорічної температури за останні 50 років.</p>
+        <img src="{{ url_for('static', filename='temperature_chart.png') }}" alt="Графік температури" class="img-fluid">
+      </div>
+      <div class="col-lg-6 mb-4">
+        <h2>Зміна рівня опадів</h2>
+        <p>Супутникові дані про кількість опадів у регіоні.</p>
+        <img src="{{ url_for('static', filename='rainfall_chart.png') }}" alt="Графік рівня опадів" class="img-fluid">
+      </div>
+    </section>
         
-        <!-- Секція: Карта регіону -->
-        <section class="map-section mb-4">
-            <h2>Мапа регіону з кліматичними змінами</h2>
-            <iframe src="{{ url_for('static', filename='map.html') }}" class="map-container" style="width: 100%; height: 500px;"></iframe>
-        </section>
-    </main>
+    <section class="map-section mb-4">
+      <h2>Мапа регіону з кліматичними змінами</h2>
+      <!-- Initial map image -->
+      <img id="weather-map" src="{{ url_for('static', filename='initial_map.png') }}" class="map-container" alt="Weather Map" style="width: 100%; height: 500px;">
+      <button id="update-map" class="btn btn-primary mt-3">Оновити карту</button>
+    </section>
 
-    <footer class="text-white text-center py-4">
-        <p>&copy; 2024 Дослідження клімату у Дніпрі. Всі права захищено.</p>
-    </footer>
+  </main>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Скрипти для графіків та карти -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <footer class="text-white text-center py-4">
+    <p>&copy; 2024 Дослідження клімату у Дніпрі. Всі права захищено.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <script>
+    // Handle the "Оновити карту" button click
+    document.getElementById('update-map').addEventListener('click', function() {
+        fetch('/weather_map')  // Make an AJAX request to the /weather_map route
+            .then(response => response.json())  // Parse the JSON response
+            .then(data => {
+                // Update the map image source
+                document.getElementById('weather-map').src = data.map_url;
+            })
+            .catch(error => console.error('Error fetching weather map:', error));
+    });
+  </script>
+
 </body>
 </html>

@@ -27,6 +27,15 @@ def home():
     return render_template('index1.html', temperature=temperature)  # Pass temperature to index.html
 
 
+@app.route('/teams')
+def tems():
+    temperature = data_dict["main"]["temp"]
+    return render_template('teams.html', temperature=temperature)
+
+
+
+
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)

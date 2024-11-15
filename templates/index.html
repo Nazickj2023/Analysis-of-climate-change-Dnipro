@@ -7,13 +7,35 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <style>
-    /* Подключение шрифта Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
   </style>
 </head>
 <body>
 
-  <!-- Заголовок сторінки -->
+  <!-- Навигационная панель с кнопками сверху -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Кліматичні зміни у Дніпрі</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') }}">Аналіз кліматичних умов</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('tems') }}">Команда проекту</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('another_page') }}">Головна</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Заголовок страницы -->
   <header class="bg-primary text-white text-center py-5">
     <div class="container">
       <h1 class="display-4">Кліматичні зміни у місті Дніпро</h1>
@@ -21,9 +43,8 @@
     </div>
   </header>
 
-  <!-- Головний контент -->
+  <!-- Главный контент -->
   <main class="container my-5">
-    <!-- Секція: Інформація про поточну погоду -->
     <section class="row mb-5">
       <div class="col-lg-6">
         <h2 class="mb-4">Поточна погода у місті Дніпро</h2>
@@ -34,8 +55,11 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <!-- Додайте тут вашу карту або графік -->
-        <div class="map-container"></div>
+        <!-- Карта или график -->
+        <div class="map-container">
+          <!-- Здесь добавляется изображение карты -->
+          <img src="{{ url_for('static', filename='Dnipro.png') }}" alt="Карта" class="img-fluid">
+        </div>
       </div>
     </section>
   </main>
@@ -47,7 +71,6 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
